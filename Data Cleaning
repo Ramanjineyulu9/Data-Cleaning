@@ -468,6 +468,7 @@ print(df2)
 1   4    David   80000
 2   5      Eve   90000
 3   6    Frank  100000
+
 df1.merge(df2)
 ID	Name	Age	Salary
 0	3	Charlie	35	70000
@@ -476,6 +477,7 @@ df1.merge(df2,how="inner")
 ID	Name	Age	Salary
 0	3	Charlie	35	70000
 1	4	David	40	80000
+
 df1.merge(df2,how="outer")
 ID	Name	Age	Salary
 0	1	Alice	25.0	NaN
@@ -484,18 +486,21 @@ ID	Name	Age	Salary
 3	4	David	40.0	80000.0
 4	5	Eve	NaN	90000.0
 5	6	Frank	NaN	100000.0
+
 df1.merge(df2,how="right")
 ID	Name	Age	Salary
 0	3	Charlie	35.0	70000
 1	4	David	40.0	80000
 2	5	Eve	NaN	90000
 3	6	Frank	NaN	100000
+
 df1.merge(df2,how="left")
 ID	Name	Age	Salary
 0	1	Alice	25	NaN
 1	2	Bob	30	NaN
 2	3	Charlie	35	70000.0
 3	4	David	40	80000.0
+
 df1.merge(df2,how="cross")
 ID_x	Name_x	Age	ID_y	Name_y	Salary
 0	1	Alice	25	3	Charlie	70000
@@ -514,6 +519,7 @@ ID_x	Name_x	Age	ID_y	Name_y	Salary
 13	4	David	40	4	David	80000
 14	4	David	40	5	Eve	90000
 15	4	David	40	6	Frank	100000
+
 df1.merge(df2,how="inner",on=['Name'])
 ID_x	Name	Age	ID_y	Salary
 0	3	Charlie	35	3	70000

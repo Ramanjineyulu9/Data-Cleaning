@@ -1,0 +1,520 @@
+import seaborn as sns 
+import pandas as pd  
+
+df = sns.load_dataset("tips")
+df.head()
+total_bill	tip	sex	smoker	day	time	size
+0	16.99	1.01	Female	No	Sun	Dinner	2
+1	10.34	1.66	Male	No	Sun	Dinner	3
+2	21.01	3.50	Male	No	Sun	Dinner	3
+3	23.68	3.31	Male	No	Sun	Dinner	2
+4	24.59	3.61	Female	No	Sun	Dinner	4
+import seaborn as sns 
+import pandas as pd  
+
+df = sns.load_dataset('fmri')
+df.head()
+subject	timepoint	event	region	signal
+0	s13	18	stim	parietal	-0.017552
+1	s5	14	stim	parietal	-0.080883
+2	s12	18	stim	parietal	-0.081033
+3	s11	18	stim	parietal	-0.046134
+4	s10	18	stim	parietal	-0.037970
+df.isna().sum()
+subject      0
+timepoint    0
+event        0
+region       0
+signal       0
+dtype: int64
+import pandas as pd  
+import seaborn as sns 
+import matplotlib.pyplot as plt 
+import numpy as np 
+df = pd.read_csv("C:/nodejs scripts/movies.csv")
+df.head()
+MOVIES	YEAR	RATING	VOTES	RunTime
+0	Blood Red Sky	-2021	6.1	21,062	121.0
+1	Masters of the Universe: Revelation	(2021– )	5.0	17,870	25.0
+2	The Walking Dead	(2010–2022)	8.2	8,85,805	44.0
+3	Rick and Morty	(2013– )	9.2	4,14,849	23.0
+4	Army of Thieves	-2021	NaN	NaN	NaN
+df.isna()
+MOVIES	YEAR	RATING	VOTES	RunTime
+0	False	False	False	False	False
+1	False	False	False	False	False
+2	False	False	False	False	False
+3	False	False	False	False	False
+4	False	False	True	True	True
+...	...	...	...	...	...
+9994	False	False	True	True	True
+9995	False	False	True	True	True
+9996	False	False	True	True	True
+9997	False	False	True	True	True
+9998	False	False	True	True	True
+9999 rows × 5 columns
+
+df.isna().sum()
+MOVIES        0
+YEAR        644
+RATING     1820
+VOTES      1820
+RunTime    2958
+dtype: int64
+df.isna().any()
+MOVIES     False
+YEAR        True
+RATING      True
+VOTES       True
+RunTime     True
+dtype: bool
+df.dropna()
+MOVIES	YEAR	RATING	VOTES	RunTime
+0	Blood Red Sky	-2021	6.1	21,062	121.0
+1	Masters of the Universe: Revelation	(2021– )	5.0	17,870	25.0
+2	The Walking Dead	(2010–2022)	8.2	8,85,805	44.0
+3	Rick and Morty	(2013– )	9.2	4,14,849	23.0
+5	Outer Banks	(2020– )	7.6	25,858	50.0
+...	...	...	...	...	...
+9959	Sexify	(2021– )	6.8	108	38.0
+9960	Sexify	(2021– )	7.1	103	37.0
+9961	Sexify	(2021– )	6.9	96	40.0
+9962	Sexify	(2021– )	7.1	100	47.0
+9963	Castlevania	(2017–2021)	8.2	911	24.0
+6786 rows × 5 columns
+
+df.isna().sum()
+MOVIES        0
+YEAR        644
+RATING     1820
+VOTES      1820
+RunTime    2958
+dtype: int64
+df1 =df.fillna(method="ffill")
+C:\Users\pasam\AppData\Local\Temp\ipykernel_10976\2071324459.py:1: FutureWarning: DataFrame.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df1 =df.fillna(method="ffill")
+df1.isna().sum()
+MOVIES     0
+YEAR       0
+RATING     0
+VOTES      0
+RunTime    0
+dtype: int64
+df1
+MOVIES	YEAR	RATING	VOTES	RunTime
+0	Blood Red Sky	-2021	6.1	21,062	121.0
+1	Masters of the Universe: Revelation	(2021– )	5.0	17,870	25.0
+2	The Walking Dead	(2010–2022)	8.2	8,85,805	44.0
+3	Rick and Morty	(2013– )	9.2	4,14,849	23.0
+4	Army of Thieves	-2021	9.2	4,14,849	23.0
+...	...	...	...	...	...
+9994	The Imperfects	(2021– )	8.8	433	38.0
+9995	Arcane	(2021– )	8.8	433	38.0
+9996	Heart of Invictus	(2022– )	8.8	433	38.0
+9997	The Imperfects	(2021– )	8.8	433	38.0
+9998	The Imperfects	(2021– )	8.8	433	38.0
+9999 rows × 5 columns
+
+sns.heatmap(df.isnull(),annot=True)
+<Axes: >
+
+
+df.fillna(method="bfill")
+C:\Users\pasam\AppData\Local\Temp\ipykernel_10976\3896554658.py:1: FutureWarning: DataFrame.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df.fillna(method="bfill")
+MOVIES	YEAR	RATING	VOTES	RunTime
+0	Blood Red Sky	-2021	6.1	21,062	121.0
+1	Masters of the Universe: Revelation	(2021– )	5.0	17,870	25.0
+2	The Walking Dead	(2010–2022)	8.2	8,85,805	44.0
+3	Rick and Morty	(2013– )	9.2	4,14,849	23.0
+4	Army of Thieves	-2021	7.6	25,858	50.0
+...	...	...	...	...	...
+9994	The Imperfects	(2021– )	NaN	NaN	NaN
+9995	Arcane	(2021– )	NaN	NaN	NaN
+9996	Heart of Invictus	(2022– )	NaN	NaN	NaN
+9997	The Imperfects	(2021– )	NaN	NaN	NaN
+9998	The Imperfects	(2021– )	NaN	NaN	NaN
+9999 rows × 5 columns
+
+import sklearn.preprocessing as preprocessing 
+le = preprocessing.LabelEncoder()
+df["YEAR"]= le.fit_transform(df["YEAR"])
+df.head()
+MOVIES	YEAR	RATING	VOTES	RunTime
+0	Blood Red Sky	435	6.1	21,062	121.0
+1	Masters of the Universe: Revelation	264	5.0	17,870	25.0
+2	The Walking Dead	158	8.2	8,85,805	44.0
+3	Rick and Morty	188	9.2	4,14,849	23.0
+4	Army of Thieves	435	NaN	NaN	NaN
+df2 = df.fillna(method="bfill")
+df2.head()
+C:\Users\pasam\AppData\Local\Temp\ipykernel_10976\2000155891.py:1: FutureWarning: DataFrame.fillna with 'method' is deprecated and will raise in a future version. Use obj.ffill() or obj.bfill() instead.
+  df2 = df.fillna(method="bfill")
+MOVIES	YEAR	RATING	VOTES	RunTime
+0	Blood Red Sky	435	6.1	21,062	121.0
+1	Masters of the Universe: Revelation	264	5.0	17,870	25.0
+2	The Walking Dead	158	8.2	8,85,805	44.0
+3	Rick and Morty	188	9.2	4,14,849	23.0
+4	Army of Thieves	435	7.6	25,858	50.0
+df.fillna(0)
+MOVIES	YEAR	RATING	VOTES	RunTime
+0	Blood Red Sky	435	6.1	21,062	121.0
+1	Masters of the Universe: Revelation	264	5.0	17,870	25.0
+2	The Walking Dead	158	8.2	8,85,805	44.0
+3	Rick and Morty	188	9.2	4,14,849	23.0
+4	Army of Thieves	435	0.0	0	0.0
+...	...	...	...	...	...
+9994	The Imperfects	264	0.0	0	0.0
+9995	Arcane	264	0.0	0	0.0
+9996	Heart of Invictus	266	0.0	0	0.0
+9997	The Imperfects	264	0.0	0	0.0
+9998	The Imperfects	264	0.0	0	0.0
+9999 rows × 5 columns
+
+df.isna().sum()
+MOVIES        0
+YEAR          0
+RATING     1820
+VOTES      1820
+RunTime    2958
+dtype: int64
+df2.pop("MOVIES")
+0                             Blood Red Sky
+1       Masters of the Universe: Revelation
+2                          The Walking Dead
+3                            Rick and Morty
+4                           Army of Thieves
+                       ...                 
+9994                         The Imperfects
+9995                                 Arcane
+9996                      Heart of Invictus
+9997                         The Imperfects
+9998                         The Imperfects
+Name: MOVIES, Length: 9999, dtype: object
+import seaborn as sns
+numeric_df = df2.select_dtypes(include=['float', 'int'])
+sns.heatmap(numeric_df, annot=True)
+<Axes: >
+
+
+df.interpolate()
+C:\Users\pasam\AppData\Local\Temp\ipykernel_10976\4002874584.py:1: FutureWarning: DataFrame.interpolate with object dtype is deprecated and will raise in a future version. Call obj.infer_objects(copy=False) before interpolating instead.
+  df.interpolate()
+MOVIES	YEAR	RATING	VOTES	RunTime
+0	Blood Red Sky	435	6.1	21,062	121.0
+1	Masters of the Universe: Revelation	264	5.0	17,870	25.0
+2	The Walking Dead	158	8.2	8,85,805	44.0
+3	Rick and Morty	188	9.2	4,14,849	23.0
+4	Army of Thieves	435	8.4	NaN	36.5
+...	...	...	...	...	...
+9994	The Imperfects	264	8.8	NaN	38.0
+9995	Arcane	264	8.8	NaN	38.0
+9996	Heart of Invictus	266	8.8	NaN	38.0
+9997	The Imperfects	264	8.8	NaN	38.0
+9998	The Imperfects	264	8.8	NaN	38.0
+9999 rows × 5 columns
+
+df['VOTES'] = df['VOTES'].replace({',': ''}, regex=True)
+df['VOTES'] = pd.to_numeric(df['VOTES'], errors='coerce')
+df['RATING'] = pd.to_numeric(df['RATING'], errors='coerce')
+df['RunTime'] = pd.to_numeric(df['RunTime'], errors='coerce')
+df.head()
+MOVIES	YEAR	RATING	VOTES	RunTime
+0	Blood Red Sky	435	6.1	21062.0	121.0
+1	Masters of the Universe: Revelation	264	5.0	17870.0	25.0
+2	The Walking Dead	158	8.2	885805.0	44.0
+3	Rick and Morty	188	9.2	414849.0	23.0
+4	Army of Thieves	435	NaN	NaN	NaN
+interpolate = df.interpolate()
+interpolate.head()
+C:\Users\pasam\AppData\Local\Temp\ipykernel_10976\4154875685.py:1: FutureWarning: DataFrame.interpolate with object dtype is deprecated and will raise in a future version. Call obj.infer_objects(copy=False) before interpolating instead.
+  interpolate = df.interpolate()
+MOVIES	YEAR	RATING	VOTES	RunTime
+0	Blood Red Sky	435	6.1	21062.0	121.0
+1	Masters of the Universe: Revelation	264	5.0	17870.0	25.0
+2	The Walking Dead	158	8.2	885805.0	44.0
+3	Rick and Morty	188	9.2	414849.0	23.0
+4	Army of Thieves	435	8.4	220353.5	36.5
+print(interpolate.isna().sum())
+MOVIES     0
+YEAR       0
+RATING     0
+VOTES      0
+RunTime    0
+dtype: int64
+df = pd.read_csv("C:/nodejs scripts/weatherHistory.csv")
+df.head()
+Formatted Date	Summary	Temperature (C)	Apparent Temperature (C)	Humidity	Wind Speed (km/h)	Wind Bearing (degrees)	Visibility (km)	Loud Cover	Pressure (millibars)
+0	2006-04-01 00:00:00.000 +0200	Partly Cloudy	9.472222	7.388889	0.89	14.1197	251	15.8263	0	1015.13
+1	2006-04-01 01:00:00.000 +0200	Partly Cloudy	9.355556	7.227778	0.86	14.2646	259	15.8263	0	1015.63
+2	2006-04-01 02:00:00.000 +0200	Mostly Cloudy	9.377778	9.377778	0.89	3.9284	204	14.9569	0	1015.94
+3	2006-04-01 03:00:00.000 +0200	Partly Cloudy	8.288889	5.944444	0.83	14.1036	269	15.8263	0	1016.41
+4	2006-04-01 04:00:00.000 +0200	Mostly Cloudy	8.755556	6.977778	0.83	11.0446	259	15.8263	0	1016.51
+df['Formatted Date'] = pd.to_datetime(df.iloc[:, 0], errors='coerce')
+df.head()
+Formatted Date	Summary	Temperature (C)	Apparent Temperature (C)	Humidity	Wind Speed (km/h)	Wind Bearing (degrees)	Visibility (km)	Loud Cover	Pressure (millibars)
+0	2006-04-01 00:00:00+02:00	Partly Cloudy	9.472222	7.388889	0.89	14.1197	251	15.8263	0	1015.13
+1	2006-04-01 01:00:00+02:00	Partly Cloudy	9.355556	7.227778	0.86	14.2646	259	15.8263	0	1015.63
+2	2006-04-01 02:00:00+02:00	Mostly Cloudy	9.377778	9.377778	0.89	3.9284	204	14.9569	0	1015.94
+3	2006-04-01 03:00:00+02:00	Partly Cloudy	8.288889	5.944444	0.83	14.1036	269	15.8263	0	1016.41
+4	2006-04-01 04:00:00+02:00	Mostly Cloudy	8.755556	6.977778	0.83	11.0446	259	15.8263	0	1016.51
+column_1 = df['Formatted Date']
+date_df = pd.DataFrame({
+    "year": column_1.dt.year,
+    "month": column_1.dt.month,
+    "day": column_1.dt.day,
+    "hour": column_1.dt.hour,
+    "dayofyear": column_1.dt.dayofyear,
+    "dayofweek": column_1.dt.dayofweek,
+    "weekday": column_1.dt.weekday,
+    "quarter": column_1.dt.quarter
+})
+date_df
+year	month	day	hour	dayofyear	dayofweek	weekday	quarter
+0	2006.0	4.0	1.0	0.0	91.0	5.0	5.0	2.0
+1	2006.0	4.0	1.0	1.0	91.0	5.0	5.0	2.0
+2	2006.0	4.0	1.0	2.0	91.0	5.0	5.0	2.0
+3	2006.0	4.0	1.0	3.0	91.0	5.0	5.0	2.0
+4	2006.0	4.0	1.0	4.0	91.0	5.0	5.0	2.0
+...	...	...	...	...	...	...	...	...
+96448	2016.0	9.0	9.0	19.0	253.0	4.0	4.0	3.0
+96449	2016.0	9.0	9.0	20.0	253.0	4.0	4.0	3.0
+96450	2016.0	9.0	9.0	21.0	253.0	4.0	4.0	3.0
+96451	2016.0	9.0	9.0	22.0	253.0	4.0	4.0	3.0
+96452	2016.0	9.0	9.0	23.0	253.0	4.0	4.0	3.0
+96453 rows × 8 columns
+
+#MERGE,JOIN AND CONCATENATE
+import pandas as pd  
+import seaborn as sns 
+df1 = sns.load_dataset("tips")
+df1.head()
+total_bill	tip	sex	smoker	day	time	size
+0	16.99	1.01	Female	No	Sun	Dinner	2
+1	10.34	1.66	Male	No	Sun	Dinner	3
+2	21.01	3.50	Male	No	Sun	Dinner	3
+3	23.68	3.31	Male	No	Sun	Dinner	2
+4	24.59	3.61	Female	No	Sun	Dinner	4
+df1.isna().sum()
+total_bill    0
+tip           0
+sex           0
+smoker        0
+day           0
+time          0
+size          0
+dtype: int64
+print(sns.get_dataset_names())
+['anagrams', 'anscombe', 'attention', 'brain_networks', 'car_crashes', 'diamonds', 'dots', 'dowjones', 'exercise', 'flights', 'fmri', 'geyser', 'glue', 'healthexp', 'iris', 'mpg', 'penguins', 'planets', 'seaice', 'taxis', 'tips', 'titanic']
+df2 = sns.load_dataset('fmri')
+df2.head()
+subject	timepoint	event	region	signal
+0	s13	18	stim	parietal	-0.017552
+1	s5	14	stim	parietal	-0.080883
+2	s12	18	stim	parietal	-0.081033
+3	s11	18	stim	parietal	-0.046134
+4	s10	18	stim	parietal	-0.037970
+df2.rename(columns={ 'timepoint': 'tip','event': 'smoker','region': 'time','signal':'size'}, inplace=True)
+df2.isna().sum()
+total_bill    0
+tip           0
+smoker        0
+time          0
+size          0
+dtype: int64
+pd.concat([df1,df2])
+total_bill	tip	sex	smoker	day	time	size
+0	16.99	1.01	Female	No	Sun	Dinner	2.000000
+1	10.34	1.66	Male	No	Sun	Dinner	3.000000
+2	21.01	3.50	Male	No	Sun	Dinner	3.000000
+3	23.68	3.31	Male	No	Sun	Dinner	2.000000
+4	24.59	3.61	Female	No	Sun	Dinner	4.000000
+...	...	...	...	...	...	...	...
+1059	s0	8.00	NaN	cue	NaN	frontal	0.018165
+1060	s13	7.00	NaN	cue	NaN	frontal	-0.029130
+1061	s12	7.00	NaN	cue	NaN	frontal	-0.004939
+1062	s11	7.00	NaN	cue	NaN	frontal	-0.025367
+1063	s0	0.00	NaN	cue	NaN	parietal	-0.006899
+1308 rows × 7 columns
+
+pd.concat([df1,df2],join="inner")
+total_bill	tip	smoker	time	size
+0	16.99	1.01	No	Dinner	2.000000
+1	10.34	1.66	No	Dinner	3.000000
+2	21.01	3.50	No	Dinner	3.000000
+3	23.68	3.31	No	Dinner	2.000000
+4	24.59	3.61	No	Dinner	4.000000
+...	...	...	...	...	...
+1059	s0	8.00	cue	frontal	0.018165
+1060	s13	7.00	cue	frontal	-0.029130
+1061	s12	7.00	cue	frontal	-0.004939
+1062	s11	7.00	cue	frontal	-0.025367
+1063	s0	0.00	cue	parietal	-0.006899
+1308 rows × 5 columns
+
+pd.concat([df1,df2],join="outer")
+total_bill	tip	sex	smoker	day	time	size
+0	16.99	1.01	Female	No	Sun	Dinner	2.000000
+1	10.34	1.66	Male	No	Sun	Dinner	3.000000
+2	21.01	3.50	Male	No	Sun	Dinner	3.000000
+3	23.68	3.31	Male	No	Sun	Dinner	2.000000
+4	24.59	3.61	Female	No	Sun	Dinner	4.000000
+...	...	...	...	...	...	...	...
+1059	s0	8.00	NaN	cue	NaN	frontal	0.018165
+1060	s13	7.00	NaN	cue	NaN	frontal	-0.029130
+1061	s12	7.00	NaN	cue	NaN	frontal	-0.004939
+1062	s11	7.00	NaN	cue	NaN	frontal	-0.025367
+1063	s0	0.00	NaN	cue	NaN	parietal	-0.006899
+1308 rows × 7 columns
+
+pd.concat([df1,df2],join="outer",axis=1)
+total_bill	tip	sex	smoker	day	time	size	total_bill	tip	smoker	time	size
+0	16.99	1.01	Female	No	Sun	Dinner	2.0	s13	18	stim	parietal	-0.017552
+1	10.34	1.66	Male	No	Sun	Dinner	3.0	s5	14	stim	parietal	-0.080883
+2	21.01	3.50	Male	No	Sun	Dinner	3.0	s12	18	stim	parietal	-0.081033
+3	23.68	3.31	Male	No	Sun	Dinner	2.0	s11	18	stim	parietal	-0.046134
+4	24.59	3.61	Female	No	Sun	Dinner	4.0	s10	18	stim	parietal	-0.037970
+...	...	...	...	...	...	...	...	...	...	...	...	...
+1059	NaN	NaN	NaN	NaN	NaN	NaN	NaN	s0	8	cue	frontal	0.018165
+1060	NaN	NaN	NaN	NaN	NaN	NaN	NaN	s13	7	cue	frontal	-0.029130
+1061	NaN	NaN	NaN	NaN	NaN	NaN	NaN	s12	7	cue	frontal	-0.004939
+1062	NaN	NaN	NaN	NaN	NaN	NaN	NaN	s11	7	cue	frontal	-0.025367
+1063	NaN	NaN	NaN	NaN	NaN	NaN	NaN	s0	0	cue	parietal	-0.006899
+1064 rows × 12 columns
+
+df1.join(df2,on="tip",how="inner",lsuffix="_Left",rsuffix="_Right")
+C:\Users\pasam\AppData\Local\Temp\ipykernel_10976\2555902535.py:1: UserWarning: You are merging on int and float columns where the float values are not equal to their int representation.
+  df1.join(df2,on="tip",how="inner",lsuffix="_Left",rsuffix="_Right")
+tip	total_bill_Left	tip_Left	sex	smoker_Left	day	time_Left	size_Left	total_bill_Right	tip_Right	smoker_Right	time_Right	size_Right
+6	2.0	8.77	2.0	Male	No	Sun	Dinner	2	s12	18	stim	parietal	-0.081033
+26	2.0	13.37	2.0	Male	No	Sat	Dinner	2	s12	18	stim	parietal	-0.081033
+27	2.0	12.69	2.0	Male	No	Sat	Dinner	2	s12	18	stim	parietal	-0.081033
+36	2.0	16.31	2.0	Male	No	Sat	Dinner	3	s12	18	stim	parietal	-0.081033
+61	2.0	13.81	2.0	Male	Yes	Sat	Dinner	2	s12	18	stim	parietal	-0.081033
+...	...	...	...	...	...	...	...	...	...	...	...	...	...
+194	4.0	16.58	4.0	Male	Yes	Thur	Lunch	2	s10	18	stim	parietal	-0.037970
+200	4.0	18.71	4.0	Male	Yes	Thur	Lunch	3	s10	18	stim	parietal	-0.037970
+204	4.0	20.53	4.0	Male	Yes	Thur	Lunch	4	s10	18	stim	parietal	-0.037970
+170	10.0	50.81	10.0	Male	Yes	Sat	Dinner	3	s4	18	stim	parietal	-0.048812
+212	9.0	48.33	9.0	Male	No	Sat	Dinner	4	s5	18	stim	parietal	-0.040557
+85 rows × 13 columns
+
+df1.join(df2,on="time",how="outer",lsuffix="_Left",rsuffix="_Right")
+time	total_bill_Left	tip_Left	sex	smoker_Left	day	time_Left	size_Left	total_bill_Right	tip_Right	smoker_Right	time_Right	size_Right
+0.0	Dinner	16.99	1.01	Female	No	Sun	Dinner	2.0	NaN	NaN	NaN	NaN	NaN
+1.0	Dinner	10.34	1.66	Male	No	Sun	Dinner	3.0	NaN	NaN	NaN	NaN	NaN
+2.0	Dinner	21.01	3.50	Male	No	Sun	Dinner	3.0	NaN	NaN	NaN	NaN	NaN
+3.0	Dinner	23.68	3.31	Male	No	Sun	Dinner	2.0	NaN	NaN	NaN	NaN	NaN
+4.0	Dinner	24.59	3.61	Female	No	Sun	Dinner	4.0	NaN	NaN	NaN	NaN	NaN
+...	...	...	...	...	...	...	...	...	...	...	...	...	...
+NaN	1059	NaN	NaN	NaN	NaN	NaN	NaN	NaN	s0	8.0	cue	frontal	0.018165
+NaN	1060	NaN	NaN	NaN	NaN	NaN	NaN	NaN	s13	7.0	cue	frontal	-0.029130
+NaN	1061	NaN	NaN	NaN	NaN	NaN	NaN	NaN	s12	7.0	cue	frontal	-0.004939
+NaN	1062	NaN	NaN	NaN	NaN	NaN	NaN	NaN	s11	7.0	cue	frontal	-0.025367
+NaN	1063	NaN	NaN	NaN	NaN	NaN	NaN	NaN	s0	0.0	cue	parietal	-0.006899
+1308 rows × 13 columns
+
+df1.join(df2,on="time",how="right",lsuffix="_Left",rsuffix="_Right")
+time	total_bill_Left	tip_Left	sex	smoker_Left	day	time_Left	size_Left	total_bill_Right	tip_Right	smoker_Right	time_Right	size_Right
+NaN	0	NaN	NaN	NaN	NaN	NaN	NaN	NaN	s13	18	stim	parietal	-0.017552
+NaN	1	NaN	NaN	NaN	NaN	NaN	NaN	NaN	s5	14	stim	parietal	-0.080883
+NaN	2	NaN	NaN	NaN	NaN	NaN	NaN	NaN	s12	18	stim	parietal	-0.081033
+NaN	3	NaN	NaN	NaN	NaN	NaN	NaN	NaN	s11	18	stim	parietal	-0.046134
+NaN	4	NaN	NaN	NaN	NaN	NaN	NaN	NaN	s10	18	stim	parietal	-0.037970
+...	...	...	...	...	...	...	...	...	...	...	...	...	...
+NaN	1059	NaN	NaN	NaN	NaN	NaN	NaN	NaN	s0	8	cue	frontal	0.018165
+NaN	1060	NaN	NaN	NaN	NaN	NaN	NaN	NaN	s13	7	cue	frontal	-0.029130
+NaN	1061	NaN	NaN	NaN	NaN	NaN	NaN	NaN	s12	7	cue	frontal	-0.004939
+NaN	1062	NaN	NaN	NaN	NaN	NaN	NaN	NaN	s11	7	cue	frontal	-0.025367
+NaN	1063	NaN	NaN	NaN	NaN	NaN	NaN	NaN	s0	0	cue	parietal	-0.006899
+1064 rows × 13 columns
+
+ram=df1.join(df2,on="time",how="left",lsuffix="_Left",rsuffix="_Right")
+total_bill_Left	tip_Left	sex	smoker_Left	day	time_Left	size_Left	total_bill_Right	tip_Right	smoker_Right	time_Right	size_Right
+0	16.99	1.01	Female	No	Sun	Dinner	2	NaN	NaN	NaN	NaN	NaN
+1	10.34	1.66	Male	No	Sun	Dinner	3	NaN	NaN	NaN	NaN	NaN
+2	21.01	3.50	Male	No	Sun	Dinner	3	NaN	NaN	NaN	NaN	NaN
+3	23.68	3.31	Male	No	Sun	Dinner	2	NaN	NaN	NaN	NaN	NaN
+4	24.59	3.61	Female	No	Sun	Dinner	4	NaN	NaN	NaN	NaN	NaN
+...	...	...	...	...	...	...	...	...	...	...	...	...
+239	29.03	5.92	Male	No	Sat	Dinner	3	NaN	NaN	NaN	NaN	NaN
+240	27.18	2.00	Female	Yes	Sat	Dinner	2	NaN	NaN	NaN	NaN	NaN
+241	22.67	2.00	Male	Yes	Sat	Dinner	2	NaN	NaN	NaN	NaN	NaN
+242	17.82	1.75	Male	No	Sat	Dinner	2	NaN	NaN	NaN	NaN	NaN
+243	18.78	3.00	Female	No	Thur	Dinner	2	NaN	NaN	NaN	NaN	NaN
+244 rows × 12 columns
+
+import pandas as pd
+
+df1 = pd.DataFrame({
+    'ID': [1, 2, 3, 4],
+    'Name': ['Alice', 'Bob', 'Charlie', 'David'],
+    'Age': [25, 30, 35, 40]
+})
+print(df1)
+   ID     Name  Age
+0   1    Alice   25
+1   2      Bob   30
+2   3  Charlie   35
+3   4    David   40
+df2 = pd.DataFrame({
+    'ID': [3, 4, 5, 6],
+    'Name': ['Charlie', 'David', 'Eve', 'Frank'],
+    'Salary': [70000, 80000, 90000, 100000]
+})
+print(df2)
+   ID     Name  Salary
+0   3  Charlie   70000
+1   4    David   80000
+2   5      Eve   90000
+3   6    Frank  100000
+df1.merge(df2)
+ID	Name	Age	Salary
+0	3	Charlie	35	70000
+1	4	David	40	80000
+df1.merge(df2,how="inner")
+ID	Name	Age	Salary
+0	3	Charlie	35	70000
+1	4	David	40	80000
+df1.merge(df2,how="outer")
+ID	Name	Age	Salary
+0	1	Alice	25.0	NaN
+1	2	Bob	30.0	NaN
+2	3	Charlie	35.0	70000.0
+3	4	David	40.0	80000.0
+4	5	Eve	NaN	90000.0
+5	6	Frank	NaN	100000.0
+df1.merge(df2,how="right")
+ID	Name	Age	Salary
+0	3	Charlie	35.0	70000
+1	4	David	40.0	80000
+2	5	Eve	NaN	90000
+3	6	Frank	NaN	100000
+df1.merge(df2,how="left")
+ID	Name	Age	Salary
+0	1	Alice	25	NaN
+1	2	Bob	30	NaN
+2	3	Charlie	35	70000.0
+3	4	David	40	80000.0
+df1.merge(df2,how="cross")
+ID_x	Name_x	Age	ID_y	Name_y	Salary
+0	1	Alice	25	3	Charlie	70000
+1	1	Alice	25	4	David	80000
+2	1	Alice	25	5	Eve	90000
+3	1	Alice	25	6	Frank	100000
+4	2	Bob	30	3	Charlie	70000
+5	2	Bob	30	4	David	80000
+6	2	Bob	30	5	Eve	90000
+7	2	Bob	30	6	Frank	100000
+8	3	Charlie	35	3	Charlie	70000
+9	3	Charlie	35	4	David	80000
+10	3	Charlie	35	5	Eve	90000
+11	3	Charlie	35	6	Frank	100000
+12	4	David	40	3	Charlie	70000
+13	4	David	40	4	David	80000
+14	4	David	40	5	Eve	90000
+15	4	David	40	6	Frank	100000
+df1.merge(df2,how="inner",on=['Name'])
+ID_x	Name	Age	ID_y	Salary
+0	3	Charlie	35	3	70000
+1	4	David	40	4	80000
